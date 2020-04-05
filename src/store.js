@@ -14,6 +14,10 @@ const state = {
     userId: '',
     userHead: ''
   },
+  course: {
+    courseId: '',
+    courseName: ''
+  }
 
 };
 
@@ -21,8 +25,9 @@ const getters = {
   getRoles: state => state.info.roles,
   getUserId: state => state.info.userId,
   // getUserHead: state => state.info.userHead,
-  getInfo: state => state.info
-
+  getInfo: state => state.info,
+  getcourseId: state => state.course.courseId,
+  getcourseName: state => state.course.courseName,
 };
 
 const mutations = {
@@ -43,6 +48,14 @@ const mutations = {
   //   storeLocalStore(state);
   //   console.log(state.info.userHead)
   // },
+  storecourseId(state, courseid) {
+    state.course.courseId = courseid;
+    storeLocalStore(state);
+  },
+  storecourseName(state, coursename) {
+    state.course.courseName = coursename;
+    storeLocalStore(state);
+  },
 };
 
 const actions = {
@@ -54,6 +67,12 @@ const actions = {
   },
   storeUserHead: ({commit}, {head}) => {
     commit('storeUserHead', {head});
+  },
+  storecourseId: ({commit}, {courseid}) => {
+    commit('storecourseId', {courseid});
+  },
+  storecourseName: ({commit}, {coursename}) => {
+    commit('storecourseName', {coursename});
   }
 };
 

@@ -106,7 +106,8 @@
             studentId: this.form.username,
             studentPasswd: this.form.password
           };
-          this.axios.post('http://localhost:8085/login/' + this.form.user, JSON.stringify(data),
+
+          this.axios.post('/login/' + this.form.user, JSON.stringify(data),
             {
               headers: {'Content-Type': 'application/json;charset=UTF-8'}
             }
@@ -117,7 +118,7 @@
           }).catch(response => {
             console.log(response);
             this.$message({
-              message: `error`,
+              message: `1error`,
               type: 'error'
             });
           })
@@ -126,7 +127,7 @@
             teacherId: this.form.username,
             teacherPasswd: this.form.password
           };
-          this.axios.post('http://localhost:8085/login/' + this.form.user, JSON.stringify(data),
+          this.axios.post('/login/' + this.form.user, JSON.stringify(data),
             {
               headers: {'Content-Type': 'application/json;charset=UTF-8'}
             }

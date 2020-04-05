@@ -8,7 +8,7 @@ import teacherinfo from '@/components/teacherinfo'
 import studentinfo from '@/components/studentinfo'
 import courseinfo from '@/components/courseinfo'
 import teacherAtten from '@/components/teacherAtten'
-
+import goCheck from '@/components/goCheck'
 Vue.use(Router);
 
 export default new Router({
@@ -45,10 +45,15 @@ export default new Router({
           path: 'teacherAtten',
           name: 'teacherAtten',
           component: teacherAtten
+        },
+        {
+          path: 'goCheck',
+          name: 'goCheck',
+          component: goCheck
         }
 
       ],
     },
 
-  ],mode:'history'   //去除#号
+  ], mode: 'history'   //去除#号
 })

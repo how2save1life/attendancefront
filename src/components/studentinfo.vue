@@ -118,7 +118,7 @@
 
     },
     mounted() {
-      this.axios.get("http://localhost:8085/Student/findAll").then(response => {
+      this.axios.get("/Student/findAll").then(response => {
         console.log(response);
         console.log(response.data);
         for (let i = 0; i < response.data.length; i++) {
@@ -133,7 +133,7 @@
         console.log(response);
         console.log(response.data);
       });
-      this.axios.get("http://localhost:8085/Student/pagesum").then(response => {
+      this.axios.get("/Student/pagesum").then(response => {
         this.page_count = response.data;//把后端返回的信息存如studentData[]
       }).catch(response => {
         console.log(response);
@@ -160,7 +160,7 @@
       current_change: function (currentPage) {
         this.currentPage = currentPage;
         console.log(this.currentPage);
-        this.axios.get("http://localhost:8085/Student/findAll" + "?page=" + this.currentPage).then(response => {
+        this.axios.get("/Student/findAll" + "?page=" + this.currentPage).then(response => {
           console.log(response.data);
           this.studentData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -191,7 +191,7 @@
           studentCollege: row.studentCollege
         };
         console.log(data)
-        this.axios.post('http://localhost:8085/Student/update', JSON.stringify(data), {
+        this.axios.post('/Student/update', JSON.stringify(data), {
             headers: {'Content-Type': 'application/json;charset=UTF-8'}
           }
         ).then(response => {
@@ -218,7 +218,7 @@
           cancelButtonText: '取消',
           type: 'warning',
         }).then(() =>
-          this.axios.get("http://localhost:8085/Student/delete?studentId=" + row.studentId).then(response => {
+          this.axios.get("/Student/delete?studentId=" + row.studentId).then(response => {
             console.log(response);
             this.responsealert(response.data, '刪除')
           }).catch(response => {//exception
@@ -241,7 +241,7 @@
           studentCollege: row.studentCollege
         };
         console.log(data);
-        this.axios.post('http://localhost:8085/Student/save', JSON.stringify(data), {
+        this.axios.post('/Student/save', JSON.stringify(data), {
             headers: {'Content-Type': 'application/json;charset=UTF-8'}
           }
         ).then(response => {

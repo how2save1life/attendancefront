@@ -38,11 +38,12 @@
       label="考勤次数">
     </el-table-column>
     <el-table-column
-
       label="操作"
-      width="80">
+      >
       <template slot-scope="scope">
-        <el-button  @click="submitClick(scope.row)" type="success" size="small">考勤</el-button>
+        <router-link :to="{name:'goCheck',params:{courseId:scope.row.courseId,courseName:scope.row.courseName}}">
+        <el-button   type="success" size="small" @click="toCourse(scope.row)">考勤</el-button>
+        </router-link>
       </template>
     </el-table-column>
 
@@ -62,7 +63,7 @@
 
     },
     mounted(){
-      this.axios.get("http://localhost:8085/Course/mycourse/teacher/?teacherId=" + this.userId).then(response => {
+      this.axios.get("/Course/mycourse/teacher/?teacherId=" + this.userId).then(response => {
         console.log(response.data);
         for (let i = 0; i < response.data.length; i++) {
           // console.log(response.data);
@@ -74,6 +75,12 @@
         console.log(response);
         console.log(response.data);
       })
+    },
+    methods:{
+      toCourse(row){
+        this.$store.commit('storecourseId',row.courseId)
+        this.$store.commit('storecourseName',row.courseName)
+      }
     }
   }
 </script>

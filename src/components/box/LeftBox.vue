@@ -2,7 +2,7 @@
   <div class="leftBox">
     <el-col>
       <div class="left">
-
+<el-input></el-input>
       </div>
     </el-col>
 

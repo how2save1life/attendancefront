@@ -11,7 +11,7 @@ import axios from 'axios'
 Vue.use(ElementUI);
 Vue.prototype.axios = axios;
 Vue.config.productionTip = false;
-
+axios.defaults.baseURL='http://192.168.1.5:8085';
 
 //beforeEach 必须在router生命前执行beforeEach
 router.beforeEach((to, from, next) => {

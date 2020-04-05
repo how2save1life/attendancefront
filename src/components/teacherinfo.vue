@@ -29,11 +29,11 @@
         </template>
       </el-table-column>
       <el-table-column
-        fixed="right"
         label="操作"
-        width="180">
+        width="180"
+        fixed="right">
         <template slot="header" slot-scope="scope">
-          <el-button plain type="primary" size="small" @click="saveClick()" >新增</el-button>
+          <el-button plain type="primary" size="small" @click="saveClick()">新增</el-button>
         </template>
         <template slot-scope="scope">
           <el-button v-if=scope.row.show @click="updateClick(scope.row)" type="success" size="small">保存</el-button>
@@ -83,7 +83,7 @@
           label="操作"
           width="180">
           <template slot-scope="scope">
-            <el-button  @click="submitClick(scope.row)" type="success" size="small">提交</el-button>
+            <el-button @click="submitClick(scope.row)" type="success" size="small">提交</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -102,7 +102,7 @@
         teacherData: [],
         currentPage: 1,//当前页码，默认第一页开始
         page_count: 0,
-        dialogTableVisible:false,
+        dialogTableVisible: false,
         currentteacher: {//编辑时选中的行
           teacherId: "",
           teacherName: "",
@@ -119,7 +119,7 @@
 
     },
     mounted() {
-      this.axios.get("http://localhost:8085/Teacher/findAll").then(response => {
+      this.axios.get("/Teacher/findAll").then(response => {
         console.log(response);
         console.log(response.data);
         for (let i = 0; i < response.data.length; i++) {
@@ -134,7 +134,7 @@
         console.log(response);
         console.log(response.data);
       });
-      this.axios.get("http://localhost:8085/Teacher/pagesum").then(response => {
+      this.axios.get("/Teacher/pagesum").then(response => {
         this.page_count = response.data;//把后端返回的信息存如teacherData[]
       }).catch(response => {
         console.log(response);
@@ -161,7 +161,7 @@
       current_change: function (currentPage) {
         this.currentPage = currentPage;
         console.log(this.currentPage);
-        this.axios.get("http://localhost:8085/Teacher/findAll" + "?page=" + this.currentPage).then(response => {
+        this.axios.get("/Teacher/findAll" + "?page=" + this.currentPage).then(response => {
           console.log(response.data);
           this.teacherData = [];
           for (let i = 0; i < response.data.length; i++) {
@@ -192,7 +192,7 @@
           teacherCollege: row.teacherCollege
         };
         console.log(data)
-        this.axios.post('http://localhost:8085/Teacher/update', JSON.stringify(data), {
+        this.axios.post('/Teacher/update', JSON.stringify(data), {
             headers: {'Content-Type': 'application/json;charset=UTF-8'}
           }
         ).then(response => {
@@ -219,7 +219,7 @@
           cancelButtonText: '取消',
           type: 'warning',
         }).then(() =>
-          this.axios.get("http://localhost:8085/Teacher/delete?teacherId=" + row.teacherId).then(response => {
+          this.axios.get("/Teacher/delete?teacherId=" + row.teacherId).then(response => {
             console.log(response);
             this.responsealert(response.data, '刪除')
           }).catch(response => {//exception
@@ -232,24 +232,24 @@
           }).finally(this.reload())
         )
 
-      },saveClick(){
-        this.dialogTableVisible=!this.dialogTableVisible
+      }, saveClick() {
+        this.dialogTableVisible = !this.dialogTableVisible
       },
-      submitClick(row){
+      submitClick(row) {
         let data = {
           teacherId: row.teacherId,
           teacherName: row.teacherName,
           teacherCollege: row.teacherCollege
         };
         console.log(data);
-        this.axios.post('http://localhost:8085/Teacher/save', JSON.stringify(data), {
+        this.axios.post('/Teacher/save', JSON.stringify(data), {
             headers: {'Content-Type': 'application/json;charset=UTF-8'}
           }
         ).then(response => {
           console.log(response);
           row.show = false;
           this.responsealert(response.data, '新增');
-          this.dialogTableVisible=false;
+          this.dialogTableVisible = false;
           this.reload();
         }).catch(response => {//exception
           console.log(response);
